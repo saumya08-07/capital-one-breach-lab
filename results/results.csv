@@ -1,0 +1,5 @@
+config,description,imds_mode,role_policy,credential_theft,objects_reachable,total_objects,relative_blast_radius_pct,detection,detection_latency_seconds
+A,"2019 baseline (IMDSv1, wildcard role, no detection)",v1,wildcard_role.json,succeeded,12041,12041,100.0,credential_origin_mismatch fires on first foreign call; 0 objects read before detection [would fire if deployed],immediate
+B,IMDSv2 enforced only,v2,wildcard_role.json,blocked,0,12041,0.0,no intrusion to detect (blocked earlier),n/a
+C,Least-privilege role only (IMDSv1 retained),v1,least_privilege.json,succeeded,41,12041,0.34,credential_origin_mismatch fires on first foreign call; 0 objects read before detection [would fire if deployed],immediate
+D,Full four-layer framework,v2,least_privilege.json,blocked,0,12041,0.0,no intrusion to detect (blocked earlier),n/a

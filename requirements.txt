@@ -1,0 +1,5 @@
+Flask>=3.0
+requests>=2.31
+# For regenerating the report figures with figures/make_figures.py:
+matplotlib>=3.7
+cairosvg>=2.7

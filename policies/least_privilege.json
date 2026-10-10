@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "_comment": "Corrected policy. Four constraints applied simultaneously: (1) actions enumerated rather than wildcarded, (2) resources scoped to the single bucket and prefix the WAF actually needs, (3) an explicit deny on any other S3 action so that a later policy merge cannot silently widen access, (4) the deny is expressed with NotAction so newly introduced S3 actions are denied by default rather than permitted. A WAF needs its own rule files; it has no functional requirement to read customer data.",
+  "Statement": [
+    {
+      "Sid": "ReadOnlyWafConfigPrefix",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::waf-config-bucket",
+        "arn:aws:s3:::waf-config-bucket/rules/*"
+      ]
+    },
+    {
+      "Sid": "DenyEverythingElseInS3",
+      "Effect": "Deny",
+      "NotAction": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": "arn:aws:s3:::*"
+    },
+    {
+      "Sid": "DenyReadsOutsideWafConfigBucket",
+      "Effect": "Deny",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "NotResource": [
+        "arn:aws:s3:::waf-config-bucket",
+        "arn:aws:s3:::waf-config-bucket/rules/*"
+      ]
+    }
+  ]
+}

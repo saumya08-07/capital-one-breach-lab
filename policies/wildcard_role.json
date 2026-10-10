@@ -1,0 +1,15 @@
+{
+  "Version": "2012-10-17",
+  "_comment": "ANTI-PATTERN. This reproduces the permission shape of the ISRM-WAF-Role involved in the 2019 Capital One breach: list and read actions granted against a wildcard resource, so the role can reach every bucket in the account rather than only the WAF's own configuration. Included so the experiment can measure the blast radius it produces. Do not deploy a policy of this shape.",
+  "Statement": [
+    {
+      "Sid": "OverlyBroadReadAcrossAllBuckets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:List*",
+        "s3:Get*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
