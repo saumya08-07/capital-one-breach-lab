@@ -1,4 +1,5 @@
 # Capital One Breach — Control-Efficacy Simulation
+GITHUB REPO - https://github.com/saumya08-07/capital-one-breach-lab
 
 **Group 17 — Reuel Menon, Riya Agrawal, Saumya Kumar**
 Supporting lab for the case study *Cloud Misconfiguration and IAM Privilege
